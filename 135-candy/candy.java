@@ -1,7 +1,6 @@
 class Solution {
     public int candy(int[] ratings) {
-
-        int n = ratings.length;
+         int n = ratings.length;
 
         int[] candies = new int[n];
         Arrays.fill(candies, 1);
@@ -24,6 +23,7 @@ class Solution {
         }
 
         return total;
+        
         
     }
 }
