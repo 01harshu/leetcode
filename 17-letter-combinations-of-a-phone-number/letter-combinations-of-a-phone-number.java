@@ -1,46 +1,38 @@
 class Solution {
-    List<String> ans = new ArrayList<>();
-    String[] map = {
-        "",
-        "",
-        "abc",
-        "def",
-        "ghi",
-        "jkl",
-        "mno",
-        "pqrs",
-        "tuv",
-        "wxyz"
-    
-
-    };
     public List<String> letterCombinations(String digits) {
-        
-        if(digits == null || digits.length() == 0){
-            return ans;
+        List<String> result = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return result;
         }
 
-        backtrack(digits, 0, new StringBuilder());
-        return ans;
-    }
-    private void backtrack(String digits, int index, StringBuilder curr) {
+        String[] mapping = {
+            "",     // 0
+            "",     // 1
+            "abc",  // 2
+            "def",  // 3
+            "ghi",  // 4
+            "jkl",  // 5
+            "mno",  // 6
+            "pqrs", // 7
+            "tuv",  // 8
+            "wxyz"  // 9
+        };
 
-        // Base case
+        backtrack(result, digits, mapping, 0, new StringBuilder());
+        return result;
+    }
+
+    private void backtrack(List<String> result, String digits, String[] mapping, int index, StringBuilder current) {
         if (index == digits.length()) {
-            ans.add(curr.toString());
+            result.add(current.toString());
             return;
         }
 
-        String letters = map[digits.charAt(index) - '0'];
-        for (int i = 0; i < letters.length(); i++) {
-
-            curr.append(letters.charAt(i));
-
-            backtrack(digits, index + 1, curr);
-
-            // Backtrack
-            curr.deleteCharAt(curr.length() - 1);
+        String letters = mapping[digits.charAt(index) - '0'];
+        for (char c : letters.toCharArray()) {
+            current.append(c);
+            backtrack(result, digits, mapping, index + 1, current);
+            current.deleteCharAt(current.length() - 1);
         }
     }
-
 }
